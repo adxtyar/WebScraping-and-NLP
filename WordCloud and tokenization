@@ -1,0 +1,117 @@
+import pandas as pd
+import nltk
+
+#nltk.download('punkt')
+# nltk.download('stopwords')
+#nltk.download('wordnet')
+from nltk.corpus import stopwords
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+def congnlp():
+    df = pd.read_csv('congfinal')
+
+    df['tokenized'] = df['headlines'].apply(lambda x: nltk.word_tokenize(x))
+    # print(df['tokenized'])
+    df['tokenized'] = df['tokenized'].apply(lambda x: x.lower() if type(x) == str else x)
+    # print(df)
+
+    list2 = []
+    stop_words = list(stopwords.words('english'))
+    # print(type(stop_words))
+    for i in df['tokenized']:
+        if i not in stop_words:
+            list2.append(i)
+
+    # print(list2)
+
+    # Print the filtered tokens
+    my_1d_list = [item for sublist in list2 for item in sublist]
+
+    df5 = pd.DataFrame(my_1d_list, columns=['tokenized'])
+
+    # print("Number of elements in the dataframe:", df5.size)
+
+    # print(stop_words[:20])
+    # ctrl + slash to comment out both selected
+
+    # print(df['tokenized'].__contains__('to'))
+
+    lemmatizer = WordNetLemmatizer()
+    #print(type(lemmatizer))
+
+    # words = nltk.word_tokenize(df5['tokenized'])
+    df5['tokenized'] = df5['tokenized'].apply(lambda x: lemmatizer.lemmatize(x))
+    # lemmas = [lemmatizer.lemmatize(df5['tokenzied']) for word in df5['tokenized']]
+    #
+    # # print the lemmas
+    # print(df5['tokenized'])
+
+    text = ' '.join(df5['tokenized'].astype(str))  # print all text of df into a single string
+    # print(text)
+    wordcloud = WordCloud(width=800, height=800, background_color='white', max_words=1000).generate(text)
+    # wordcloud image height and width 800 pixels max_words=1000 sets the maximum number of words to display in the word cloud
+    # plot the word cloud image using matplotlib
+    plt.figure(figsize=(8, 8))  # control size of output plot
+    plt.imshow(wordcloud, interpolation='bilinear')  # interpolation bilinear smoothens the image
+    plt.axis("off")
+    plt.show()
+def bjpnlp():
+    df = pd.read_csv('bjpfinal')
+
+    df['tokenized'] = df['headline'].apply(lambda x: nltk.word_tokenize(x))
+    # print(df['tokenized'])
+    df['tokenized'] = df['tokenized'].apply(lambda x: x.lower() if type(x) == str else x)
+    # print(df)
+
+    list2 = []
+    stop_words = list(stopwords.words('english'))
+    # print(type(stop_words))
+    for i in df['tokenized']:
+        if i not in stop_words:
+            list2.append(i)
+
+    # print(list2)
+
+    # Print the filtered tokens
+    my_1d_list = [item for sublist in list2 for item in sublist]
+
+    df5 = pd.DataFrame(my_1d_list, columns=['tokenized'])
+
+    # print("Number of elements in the dataframe:", df5.size)
+
+    # print(stop_words[:20])
+    # ctrl + slash to comment out both selected
+
+    # print(df['tokenized'].__contains__('to'))
+
+    lemmatizer = WordNetLemmatizer()
+    print(type(lemmatizer))
+
+    # words = nltk.word_tokenize(df5['tokenized'])
+    df5['tokenized'] = df5['tokenized'].apply(lambda x: lemmatizer.lemmatize(x))
+    # lemmas = [lemmatizer.lemmatize(df5['tokenzied']) for word in df5['tokenized']]
+    #
+    # # print the lemmas
+    # print(df5['tokenized'])
+
+    text = ' '.join(df5['tokenized'].astype(str))  # print all text of df into a single string
+    # print(text)
+    wordcloud = WordCloud(width=800, height=800, background_color='white', max_words=1000).generate(text)
+    # wordcloud image height and width 800 pixels max_words=1000 sets the maximum number of words to display in the word cloud
+    # plot the word cloud image using matplotlib
+    plt.figure(figsize=(8, 8))  # control size of output plot
+    plt.imshow(wordcloud, interpolation='bilinear')  # interpolation bilinear smoothens the image
+    plt.axis("off")
+    plt.show()
+
+
+
+
+bjpnlp()
+
+
+
+
+
