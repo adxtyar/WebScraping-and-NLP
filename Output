@@ -1,0 +1,12 @@
+#from after indicates python file names
+
+from sentiment import bjpnlp,congnlp
+from vader import pred_model_vader
+from roberta import pred_model_roberta
+from abi import predic_model_hinglish
+
+bjpnlp()
+congnlp()
+pred_model_vader()
+pred_model_roberta()
+predic_model_hinglish()
