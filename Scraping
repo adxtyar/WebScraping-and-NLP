@@ -89,10 +89,10 @@ def twitternews():
 
 def redditapi():
     reddit = praw.Reddit(
-        client_id="DV1woBLefNGvd71XdYUaVw",
-        client_secret="-Rh2pTvtq-w2rqCQOrVVuno1CgpkCQ",
-        # redirect_uri="http://localhost:8080",
-        user_agent="my user agent",
+        client_id="",
+        client_secret="",
+        # redirect_uri="",
+        user_agent="",
 
     )
     # print(reddit.auth.url(scopes=["identity"], state="...", duration="permanent"))
